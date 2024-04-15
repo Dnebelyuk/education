@@ -1,5 +1,6 @@
-from fastapi import APIRouter
-
+from fastapi import FastAPI, APIRouter
+from app.core import remove_duplicates
+from app.models import WordsResponse, WordsRequest
 
 router = APIRouter(tags=["Стажировка"])
 
@@ -15,10 +16,10 @@ router = APIRouter(tags=["Стажировка"])
     Список слов для примера: ['Мама', 'МАМА', 'Мама', 'папа', 'ПАПА', 'Мама', 'ДЯдя', 'брАт', 'Дядя', 'Дядя', 'Дядя']
     Ожидаемый результат: ['папа','брат']
 """
-@router.post("/find_in_different_registers", description="Задание_1. Удаление дублей")
-async def find_in_different_registers(words: list[str]) -> list[str]:
-    """Описание."""
 
-    result = []
 
-    return result
+@router.post("/remove_duplicates", response_model=WordsResponse)
+async def remove_duplicates_endpoint(req: WordsRequest) -> WordsResponse:
+    unique_words = remove_duplicates(req.words)
+    return WordsResponse(unique_words=unique_words)
+

@@ -19,6 +19,8 @@ client_host: ContextVar[str | None] = ContextVar("client_host", default=None)
 Дописать класс CustomMiddleware.
 Добавить middleware в приложение (app).
 """
+
+
 class CustomMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
         """Load request ID from headers if present. Generate one otherwise."""

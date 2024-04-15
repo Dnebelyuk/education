@@ -21,20 +21,17 @@ router = APIRouter(tags=["Стажировка"])
         "last_modification": "20/05/2023",  # формат даты должен соответствовать данному формату
         "list_of_skills": ["ловкий", "смелый"], # необязательное
         "mapping": {
-            list_of_ids: [1, "два"],
-            tags: {"стажировка", }  
-        },
-    
+            "list_of_ids": [1, "два"],
+            "tags": ["стажировка", ] 
+        }
     }
 }
-
 Напишите валидатор в модуле app.models для класса BigJson.
-
 Используйте библиотеку pydantic.
-
 """
-@router.post("/check_json", description="Задание_3. Валидация json")
+
+
+@router.post("/check_json", description="Задание_3. Валидация json", response_model_exclude_unset=True)
 async def check_json(body: BigJson) -> BigJson:
-    """ """
 
     return body
